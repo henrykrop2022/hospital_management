@@ -81,7 +81,7 @@ pipeline{
             nexusUrl: '192.168.78.112:8081', 
             nexusVersion: 'nexus3', 
             protocol: 'http', 
-            repository: 'geolocation-release',
+            repository: 'maven-nexus-repo',
             version: "${mavenPom.version}"
                 }
             }
