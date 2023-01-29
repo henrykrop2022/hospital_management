@@ -91,7 +91,7 @@ pipeline{
         stage(' Copy files from ansible to k8s server') {
              steps{
                 sshagent(['vagrant']) {
-                     sh 'ssh -o StrictHostKeyChecking=no 192.168.43.14'
+                     sh 'ssh -o StrictHostKeyChecking=no ssh -T 192.168.43.14 <<EOF '
                      sh ' scp /var/lib/jenkins/workspace/hostital-management/* 192.168.43.14:home/ubuntu'
                     }
                 }
