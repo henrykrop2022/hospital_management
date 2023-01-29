@@ -88,12 +88,13 @@ pipeline{
        
         }
         stage(' Copy files from ansible to k8s server') {
-            sshagent(['ansible-serverID']){
-                sshagent(['ansible-serverID']) {
+             steps{
+                sshagent(['ansible-serverID']){
                      sh 'ssh -o StrictHostKeyChecking=no 192.168.43.14'
                      sh ' scp /var/lib/jenkins/workspace/hostital-management/* 192.168.43.14:home/ubuntu'
+                    }
                 }
             }
         }
     }
-}
+
