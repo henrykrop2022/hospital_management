@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+    name: henry
+spec:
+    replicas: 2
+    selector:
+    matchLabels:
+      app: henry
+    template:
+       metadata:
+          Labels:
+             app: henry
+      spec:
+        containers:
+        - name: henry
+          image: henryrop/hospital-management:
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+
