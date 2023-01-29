@@ -98,18 +98,7 @@ pipeline{
                 }
             }
         }
-        stage('clean after build'){
-            steps{
-                    always {
-            cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
-                }
-            }
-        }
     }
+
 
 
