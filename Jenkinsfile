@@ -98,10 +98,9 @@ pipeline{
                 }
             }
         }
-        post {
-            stage('clean after build'){
-                steps{
-                      always {
+        stage('clean after build'){
+            steps{
+                    always {
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
                     disableDeferredWipeout: true,
@@ -112,5 +111,5 @@ pipeline{
             }
         }
     }
-}
+
 
