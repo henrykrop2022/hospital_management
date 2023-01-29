@@ -17,8 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-           <sonar.organization>dev-utrains</sonar.organization>
-  <sonar.host.url>http://192.168.56.197:9000</sonar.host.url>
+          
 <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
