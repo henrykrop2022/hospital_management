@@ -48,6 +48,7 @@ pipeline{
                 sh 'docker image build -t $JOB_NAME:V1$BUILD_ID .'
                 sh ' docker image tag $JOB_NAME:V1$BUILD_ID henryrop/$JOB_NAME:V1$BUILD_ID'
                 sh ' docker image tag $JOB_NAME:V1$BUILD_ID henryrop/$JOB_NAME:latest'
+                sh 'cleanWs()'
                 }
             }
         }
@@ -58,7 +59,7 @@ pipeline{
                         sh 'docker login -u henryrop -p ${dockerhub_cred}'
                         sh 'docker image push henryrop/$JOB_NAME:V1$BUILD_ID'
                         sh  'docker image push henryrop/$JOB_NAME:latest'
-                        sh "docker rmi -f ${oldImageID }"
+                        
                    }
                 }
              }
@@ -94,6 +95,19 @@ pipeline{
                      sh 'ssh -o StrictHostKeyChecking=no ssh root @ 192.168.43.14  '
                      sh ' scp /var/lib/jenkins/workspace/hostital-management/* 192.168.43.14:home/ubuntu'
                     }
+                }
+            }
+        }
+        post {
+            stage('clean after build'){
+                steps{
+                      always {
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
                 }
             }
         }
