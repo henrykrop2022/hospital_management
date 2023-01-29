@@ -58,7 +58,7 @@ pipeline{
                         sh 'docker login -u henryrop -p ${dockerhub_cred}'
                         sh 'docker image push henryrop/$JOB_NAME:V1$BUILD_ID'
                         sh  'docker image push henryrop/$JOB_NAME:latest'
-                        // sh 'docker image push henryrop/$JOB_NAME rm henryrop/$JOB_NAME:V1$BUILD_ID henryrop/$JOB_NAME:latest henryrop/$JOB_NAME:V1$BUILD_ID'
+                        //  sh 'cleanWs()'
                    }
                 }
              }
@@ -90,7 +90,7 @@ pipeline{
         }
         stage(' Copy files from ansible to k8s server') {
              steps{
-                sshagent(['ansible-ID']){
+                sshagent(['vagrant']) {
                      sh 'ssh -o StrictHostKeyChecking=no 192.168.43.14'
                      sh ' scp /var/lib/jenkins/workspace/hostital-management/* 192.168.43.14:home/ubuntu'
                     }
