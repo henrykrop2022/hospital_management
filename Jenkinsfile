@@ -22,32 +22,34 @@ pipeline{
                 }
             }
         }
+         stage('Maven Build'){
+            steps{
+                sh 'mvn clean install package'
+            }
+        }
+        stage(' SonarQube Analysis'){
+            steps {
+                withSonarQubeEnv('SonarQube Scanner') {
+                sh 'mvn sonar:sonar'
+                }
+            }   
+            
+        }
+         stage('Quality Gate'){
+            steps{
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                }
+            }
+       }
     }
 }
 
 
          
        
-    //     stage('Maven Build'){
-    //         steps{
-    //             sh 'mvn clean install package'
-    //         }
-    //     }
-    //     stage(' SonarQube Analysis'){
-    //         steps {
-    //             withSonarQubeEnv('SonarQube Scanner') {
-    //             sh 'mvn sonar:sonar'
-    //             }
-    //         }   
-            
-    //     }
-    //     stage('Quality Gate'){
-    //         steps{
-    //             script {
-    //                 waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-token'
-    //             }
-    //         }
-    //    }
+       
+       
     //    stage('Docker Image Build'){
     //      steps{
     //         script{
