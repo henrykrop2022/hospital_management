@@ -10,22 +10,24 @@ pipeline{
                 
             }
         }
+        stage('UNIT Testing'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+         stage('Integration Testing'){
+            steps{
+                script{
+                    sh 'mvn verify -DskipUnitTests'
+                }
+            }
+        }
     }
 }
 
 
-    // /     stage('UNIT Testing'){
-    //         steps{
-    //             sh 'mvn test'
-    //         }
-    //     }
-    //     stage('Integration Testing'){
-    //         steps{
-    //             script{
-    //                 sh 'mvn verify -DskipUnitTests'
-    //             }
-    //         }
-    //     }
+         
+       
     //     stage('Maven Build'){
     //         steps{
     //             sh 'mvn clean install package'
