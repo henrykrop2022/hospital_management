@@ -58,6 +58,7 @@ pipeline{
     //             sh 'docker image build -t $JOB_NAME:V1$BUILD_ID .'
     //             sh ' docker image tag $JOB_NAME:V1$BUILD_ID henryrop/$JOB_NAME:V1$BUILD_ID'
     //             sh ' docker image tag $JOB_NAME:V1$BUILD_ID henryrop/$JOB_NAME:latest'
+                   sh 'docker image rmi $JOB_NAME:v1.$BUILD_ID  henryrop/$JOB_NAME:v1.$BUILD_ID henryrop/$JOB_NAME:latest'
                 
     //             }
     //         }
@@ -69,6 +70,7 @@ pipeline{
     //                     sh 'docker login -u henryrop -p ${dockerhub_cred}'
     //                     sh 'docker image push henryrop/$JOB_NAME:V1$BUILD_ID'
     //                     sh  'docker image push henryrop/$JOB_NAME:latest'
+                           sh 'sh 'docker image rmi $JOB_NAME:v1.$BUILD_ID  henryrop/$JOB_NAME:v1.$BUILD_ID henryrop/$JOB_NAME:latest'
                         
     //                }
     //             }
