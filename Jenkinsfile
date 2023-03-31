@@ -49,9 +49,8 @@ pipeline{
         }
         stage('Kube Deploy'){
             steps{
-                withKubeConfig([credentialsId: 'aws-access-key', serverUrl: 'http://192.168.56.177:8080']) {
-                 sh "kubectl apply -f eks-deploy-from-ecr.yaml"
-                }
+              sh "kubectl apply -f eks-deploy-from-ecr.yaml"
+              sh "docker push education-eks-tO8NPsBG/hospital_management_ecr_repo:latest"
             }
         }
      }
