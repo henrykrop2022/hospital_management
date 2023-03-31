@@ -1,3 +1,4 @@
+@Aws
 pipeline{
     agent any
     tools {
