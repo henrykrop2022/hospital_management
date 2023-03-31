@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital_management
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hospital_management_ecr_repo
+  template:
+    metadata:
+      labels:
+        app: hospital_management_ecr_repo
+    spec:
+    containers:
+        - name: hospital_management_ecr_repo
+          image: 880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo:latest
+          imagePullPolicy: Always
+          ports:
+        - containerPort: 8082
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hospital_management_ecr_repo
+    k8s-app: hospital_management_ecr_repo
+  name: hospital_management_ecr_repo
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8082
+  type: LoadBalancer
+  selector:
+    app: hospital_management_ecr_repo
