@@ -49,7 +49,7 @@ pipeline{
         }
         stage ("Kube Deploy") {
             steps {
-                withKubeConfig([credentialsId: 'ecr-credential', serverUrl: 'https://oidc.eks.us-east-1.amazonaws.com/id/AE6BC4B23D2769EFA9A8A3DB9FA809D2']) {
+                withKubeConfig([credentialsId: 'ecr-credential', serverUrl: '']) {
                  sh "kubectl apply -f eks_deploy_from_ecr.yaml"
                 }
             }
