@@ -50,12 +50,11 @@ pipeline{
         stage('Kube Deploy'){
             steps{
                 script{
-                //  withKubeConfig(caCertificate: '', clusterName: 'education-eks-tO8NPsBG', contextName: '', credentialsId: 'aws-access-key', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') { 
-                //         sh 'aws eks update-kubeconfig --name education-eks-tO8NPsBG --region us-east-1'
+                      kubeconfig(credentialsId: 'aws-access-key', serverUrl: 'https://AE6BC4B23D2769EFA9A8A3DB9FA809D2.gr7.us-east-1.eks.amazonaws.com') {
                         sh "kubectl apply -f eks-deploy-from-ecr.yaml"
+                      }
                     }
                 }      
             }
         }
      }
-// }
