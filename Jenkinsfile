@@ -51,7 +51,7 @@ pipeline{
             steps{
                 withKubeConfig([credentialsId: 'aws-access-key', serverUrl: '']) {
                  sh "kubectl apply -f eks-deploy-from-ecr.yaml"
-                  
+                }
             }
         }
      }
