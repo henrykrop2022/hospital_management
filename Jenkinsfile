@@ -3,6 +3,9 @@ pipeline{
     tools {
         maven 'M2_HOME'
     }
+    enviroment{
+        registry = '880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo'
+    }
     stages{
         stage('Git Checkout') {
             steps{
@@ -25,6 +28,13 @@ pipeline{
                     withSonarQubeEnv(credentialsId: 'hospital-token') {
                 sh 'mvn sonar:sonar'
                     }
+                }
+            }
+        }
+        stage('Building Image'){
+            steps{
+                script{
+                    docker = docker.build registry
                 }
             }
         }
