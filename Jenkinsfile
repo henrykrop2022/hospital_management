@@ -5,6 +5,7 @@ pipeline{
     }
     enviroment{
         registry = '880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo'
+        dockerImage = ''
     }
     stages{
         stage('Git Checkout') {
