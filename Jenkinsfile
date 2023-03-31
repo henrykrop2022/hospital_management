@@ -24,6 +24,7 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'hospital-token') {
                 sh 'mvn sonar:sonar'
+                    }
                 }
             }
         }
