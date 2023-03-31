@@ -52,6 +52,7 @@ pipeline{
             withKubeConfig(caCertificate: '', clusterName: 'education-eks-tO8NPsBG', contextName: '', credentialsId: 'ecr:us-east-1:aws-access-key', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
               sh "kubectl apply -f eks-deploy-from-ecr.yaml"
               sh "docker push education-eks-tO8NPsBG/hospital_management_ecr_repo:latest"
+               }
             }
         }
      }
