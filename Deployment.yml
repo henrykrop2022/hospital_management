@@ -11,10 +11,10 @@ spec:
        metadata:
           Labels:
              app: henry
-      spec:
+       spec:
         containers:
         - name: henry
-          image: henryrop/hospital-management:
+          image: 880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo:latest
           imagePullPolicy: Always
           ports:
           - containerPort: 80

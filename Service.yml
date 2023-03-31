@@ -9,6 +9,6 @@ spec:
        - port: 8080
          targetPort: 80
          nodePort: 31200
-       selector:
+         selector:
         app: henry
-       type: LoadBalancer
+        type: LoadBalancer
