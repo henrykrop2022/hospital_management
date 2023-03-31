@@ -49,9 +49,9 @@ pipeline{
         }
         stage('Kube Deploy'){
             steps{
-                sh ('aws eks update-kubeconfig --name education-eks-tO8NPsBG --region us-east-1')
+                  withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'aws-access-key', namespace: '', serverUrl: '') {
                  sh "kubectl apply -f eks-deploy-from-ecr.yaml"
-                
+                  }
             }
         }
      }
