@@ -49,9 +49,9 @@ pipeline{
         }
         stage('Kube Deploy'){
             steps{
-                //  withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: '', contextName: '', credentialsId: 'aws-access', namespace: '', serverUrl: '']]) {
+                sh ('aws eks update-kubeconfig --name education-eks-tO8NPsBG --region us-east-1')
                  sh "kubectl apply -f eks-deploy-from-ecr.yaml"
-                // }
+                
             }
         }
      }
