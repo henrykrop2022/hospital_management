@@ -1,4 +1,3 @@
-@Aws
 pipeline{
     agent any
     tools {
@@ -50,8 +49,8 @@ pipeline{
         }
         stage('Kube Deploy'){
             steps{
+                script{
                 withAWS(credentials: 'aws-access-key', region: 'us-east-1') {
-                    script{
                         sh 'aws eks update-kubeconfig --name education-eks-tO8NPsBG --region us-east-1'
                         sh "kubectl apply -f eks-deploy-from-ecr.yaml"
                     }
