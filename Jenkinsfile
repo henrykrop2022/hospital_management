@@ -9,12 +9,12 @@ pipeline{
     }
      stages{
          stage('Git Checkout') {
-             steps{
+            steps{
              git branch: 'main', url: 'https://github.com/henrykrop2022/hospital_management.git'
              }
          }
         stage('Unit Test'){
-             steps{
+            steps{
                  sh 'mvn test'
              }
          }
@@ -24,7 +24,7 @@ pipeline{
              }
          }
         stage('Sonar Analysis'){
-             steps{
+            steps{
                 script{
                      withSonarQubeEnv(credentialsId: 'hospital-token') {
                 sh 'mvn sonar:sonar'
@@ -33,13 +33,13 @@ pipeline{
              }
          }
         stage('Building Image'){
-             steps{
+            steps{
                  script{
                      docker = docker.build registry
                 }
              }
          }
-        stage('Push into ECR'){
+         stage('Pushing to ECR'){
             stages{
                 script{
                     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 880385147960.dkr.ecr.us-east-1.amazonaws.com'
