@@ -16,8 +16,17 @@ pipeline{
         }
         stage('Maven Build'){
             steps{
-                sh 'mvn clean install package'
+                sh 'mvn clean package'
             }
         }
+        stage('Sonar Analysis'){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'hospital-token') {
+                sh 'mvn sonar:sonar'
+                }
+            }
+        }
+
     }
 }
