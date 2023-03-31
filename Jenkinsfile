@@ -47,14 +47,12 @@ pipeline{
                 }
             }
         }
-        stage('Kube Deploy'){
-            steps{
-                script{
-                       withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'aws-access-key', namespace: '', serverUrl: '') {
-                        sh "kubectl apply -f eks-deploy-from-ecr.yaml"
-                      }
-                    }
-                }      
+        stage ("Kube Deploy") {
+            steps {
+                withKubeConfig([credentialsId: 'aws-access-key', serverUrl: '']) {
+                 sh "kubectl apply -f eks_deploy_from_ecr.yaml"
+                }
             }
         }
      }
+}
