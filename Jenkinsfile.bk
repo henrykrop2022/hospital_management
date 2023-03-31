@@ -3,6 +3,9 @@ pipeline{
     tools{
         maven 'M2_HOME'
     }
+    enviroment{
+        registry = '880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo'
+    }
     stages{
         stage('Git Checkout'){
             steps{
@@ -37,12 +40,19 @@ pipeline{
             }   
             
         }
-         stage('Quality Gate'){
+        stage('Quality Gate'){
             steps{
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token2'
                 }
             }
+       }
+       stage('Building Image'){
+        steps{
+            script{
+                dockerImage = docker.buid registry
+            }
+        }
        }
     }
 }
