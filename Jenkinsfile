@@ -9,5 +9,10 @@ pipeline{
             git branch: 'main', url: 'https://github.com/henrykrop2022/hospital_management.git'
             }
         }
+        stage('Unit Test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
     }
 }
