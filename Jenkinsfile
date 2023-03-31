@@ -49,7 +49,7 @@ pipeline{
         }
         stage('Kube Deploy'){
             steps{
-                withKubeConfig([credentialsId: 'aws-access-key', serverUrl: '']) {
+                withKubeConfig([credentialsId: 'aws-access-key', serverUrl: 'http://192.168.56.177:8080']) {
                  sh "kubectl apply -f eks-deploy-from-ecr.yaml"
                 }
             }
