@@ -18,12 +18,12 @@ pipeline{
                  sh 'mvn test'
              }
          }
-         stage('Maven Build'){
+        stage('Maven Build'){
              steps{
                  sh 'mvn clean package'
              }
          }
-         stage('Sonar Analysis'){
+        stage('Sonar Analysis'){
              steps{
                 script{
                      withSonarQubeEnv(credentialsId: 'hospital-token') {
@@ -32,18 +32,18 @@ pipeline{
                  }
              }
          }
-         stage('Building Image'){
+        stage('Building Image'){
              steps{
                  script{
                      docker = docker.build registry
                 }
              }
          }
-         stage('Pushing to ECR'){
+        stage('Pushing to ECR'){
              stages{
                 script {
-               sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 880385147960.dkr.ecr.us-east-1.amazonaws.com'
-               sh 'docker push 880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo:latest'     
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 880385147960.dkr.ecr.us-east-1.amazonaws.com'
+                sh 'docker push 880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo:latest'     
                 }
             }
          }
