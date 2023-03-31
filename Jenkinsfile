@@ -50,12 +50,12 @@ pipeline{
         stage('Kube Deploy'){
             steps{
                 script{
-                 withKubeConfig(caCertificate: '', clusterName: 'education-eks-tO8NPsBG', contextName: '', credentialsId: 'aws-access-key', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') { 
-                        sh 'aws eks update-kubeconfig --name education-eks-tO8NPsBG --region us-east-1'
+                //  withKubeConfig(caCertificate: '', clusterName: 'education-eks-tO8NPsBG', contextName: '', credentialsId: 'aws-access-key', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') { 
+                //         sh 'aws eks update-kubeconfig --name education-eks-tO8NPsBG --region us-east-1'
                         sh "kubectl apply -f eks-deploy-from-ecr.yaml"
                     }
                 }      
             }
         }
      }
-}
+// }
