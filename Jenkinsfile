@@ -5,7 +5,8 @@ pipeline{
     }
     environment {
         registry = '880385147960.dkr.ecr.us-east-1.amazonaws.com/hospital_management_ecr_repo'
-        dockerImage = ''
+        registryCredential = 'ecr-credential'
+        dockerimage = ''
     }
      stages{
          stage('Git Checkout') {
@@ -35,7 +36,7 @@ pipeline{
         stage('Building Image'){
             steps{
                  script{
-                     docker = docker.build registry
+                     docker = docker.build registry + ":$BUILD_NUMBER"
                 }
              }
          }
@@ -49,7 +50,7 @@ pipeline{
         }
         stage ("Kube Deploy") {
             steps {
-                withKubeConfig([credentialsId: 'ecr-credential', serverUrl: '']) {
+                withKubeConfig([credentialsId: 'eks_credential', serverUrl: '']) {
                  sh "kubectl apply -f eks_deploy_from_ecr.yaml"
                 }
             }
