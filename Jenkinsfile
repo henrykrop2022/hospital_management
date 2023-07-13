@@ -27,8 +27,7 @@ pipeline{
         stage('Sonar Analysis'){
             steps{
                 script{
-                      withSonarQubeEnv('SonarServer') {
-                    //  withSonarQubeEnv(credentialsId: 'hospital-token') {
+                      withSonarQubeEnv(credentialsId: 'hospital-token') {
                 sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=henrykrop2022_hospital_management'
                      }
                  }
