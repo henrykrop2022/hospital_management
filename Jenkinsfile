@@ -19,9 +19,16 @@ pipeline{
                  sh 'mvn test'
              }
          }
+         stage('Integration Testing'){
+            steps{
+                script{
+                    sh 'mvn verify -DskipUnitTests'
+                }
+            }
+        }
         stage('Maven Build'){
              steps{
-                 sh 'mvn clean install'
+                 sh 'mvn clean install package'
              }
          }
         stage('Sonar Analysis'){
