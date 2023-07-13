@@ -28,7 +28,7 @@ pipeline{
             steps{
                 script{
                      withSonarQubeEnv(credentialsId: 'hospital-token') {
-                sh 'mvn sonar:sonar'
+                sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=henrykrop2022_hospital_management'
                      }
                  }
              }
